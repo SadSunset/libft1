@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbinary <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/25 17:30:36 by fbinary           #+#    #+#             */
-/*   Updated: 2021/11/13 21:17:39 by fbinary          ###   ########.fr       */
+/*   Created: 2021/11/10 21:56:52 by fbinary           #+#    #+#             */
+/*   Updated: 2021/11/11 16:33:59 by fbinary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	ft_memset(s, '\0', n);
+	size_t	len_ned;
+
+	len_ned = ft_strlen(needle);
+	if (needle[0] == '\0')
+		return ((char *)haystack);
+	while (*haystack && len >= len_ned)
+	{
+		if (*haystack == *needle && !(ft_memcmp(haystack, needle, len_ned)))
+			return ((char *)haystack);
+		haystack++;
+		len--;
+	}
+	return (NULL);
 }
